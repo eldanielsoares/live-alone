@@ -19,7 +19,7 @@ describe('DeleteMonthlySpentService', () => {
       name: 'spent',
       type: 'fixed',
       user_id: '1234',
-      value: 25,
+      amount: 25,
     });
 
     const deleteMonthlySpent = await deleteMonthlySpentService.execute(

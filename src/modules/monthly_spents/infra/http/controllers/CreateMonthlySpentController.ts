@@ -6,7 +6,7 @@ import { container } from 'tsyringe';
 
 export default class CreateMonthlySpentController {
   public async create(request: Request, response: Response): Promise<Response> {
-    const { name, type, value } = request.body;
+    const { name, type, amount } = request.body;
     const { id } = request.user;
     const createMonthlySpentService = container.resolve(
       CreateMonthlySpentService,
@@ -16,7 +16,7 @@ export default class CreateMonthlySpentController {
       name,
       type,
       user_id: id,
-      value,
+      amount,
     });
 
     return response.json(createMonthlySpent);

@@ -25,7 +25,7 @@ export default class CreateMonthlySpents1648748990985
             type: 'varchar',
           },
           {
-            name: 'value',
+            name: 'amount',
             type: 'decimal',
           },
           {

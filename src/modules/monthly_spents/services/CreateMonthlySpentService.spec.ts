@@ -13,7 +13,7 @@ describe('CreateMonthlySpentService', () => {
       name: 'spent',
       type: 'fixed',
       user_id: '1234',
-      value: 25,
+      amount: 25,
     });
 
     expect(monthlySpents).toHaveProperty('id');

@@ -17,8 +17,17 @@ class MonthlySpents {
   @Column()
   name: string;
 
-  @Column()
-  value: number;
+  @Column('decimal', {
+    transformer: {
+      to(value) {
+        return value;
+      },
+      from(value) {
+        return parseFloat(value);
+      },
+    },
+  })
+  amount: number;
 
   @Column()
   type: string;

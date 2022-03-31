@@ -1,6 +1,6 @@
 export default interface ICreateMonthlySpentDTO {
   name: string;
-  value: number;
+  amount: number;
   type: 'fixed' | 'variable';
   user_id: string;
 }
