@@ -1,29 +1,21 @@
-import { Exclude } from 'class-transformer';
 import {
   Column,
-  CreateDateColumn,
   Entity,
   PrimaryGeneratedColumn,
+  CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('users')
-class User {
+@Entity('users_codes_auth')
+class UserCodesAuth {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
-  name: string;
+  code_auth: string;
 
   @Column()
   email: string;
-
-  @Column()
-  @Exclude()
-  password: string;
-
-  @Column()
-  accepted_terms: boolean;
 
   @CreateDateColumn()
   created_at: Date;
@@ -32,4 +24,4 @@ class User {
   updated_at: Date;
 }
 
-export default User;
+export default UserCodesAuth;
