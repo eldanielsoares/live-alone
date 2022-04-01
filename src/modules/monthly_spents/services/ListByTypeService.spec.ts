@@ -3,18 +3,24 @@ import FakeMonthlySpentRepository from '../repositories/fakes/FakeMonthlySpentRe
 import CreateMonthlySpentService from './CreateMonthlySpentService';
 import ListByTypeService from './ListByTypeService';
 
+let fakeMonthlyRepository: FakeMonthlySpentRepository;
+let createMonthlySpentService: CreateMonthlySpentService;
+let listByTypeMonthlySpentService: ListByTypeService;
+
 describe('CreateMonthlySpentService', () => {
+  beforeEach(() => {
+    fakeMonthlyRepository = new FakeMonthlySpentRepository();
+
+    createMonthlySpentService = new CreateMonthlySpentService(
+      fakeMonthlyRepository,
+    );
+
+    listByTypeMonthlySpentService = new ListByTypeService(
+      fakeMonthlyRepository,
+    );
+  });
+
   it('it should be able to list a monthlySpentService', async () => {
-    const fakeMonthlyRepository = new FakeMonthlySpentRepository();
-
-    const createMonthlySpentService = new CreateMonthlySpentService(
-      fakeMonthlyRepository,
-    );
-
-    const listByTypeMonthlySpentService = new ListByTypeService(
-      fakeMonthlyRepository,
-    );
-
     const monthlySpents = await createMonthlySpentService.execute({
       name: 'spent',
       type: 'fixed',
@@ -35,16 +41,6 @@ describe('CreateMonthlySpentService', () => {
   });
 
   it('it should not be able to list a non existent monthlySpentService', async () => {
-    const fakeMonthlyRepository = new FakeMonthlySpentRepository();
-
-    const createMonthlySpentService = new CreateMonthlySpentService(
-      fakeMonthlyRepository,
-    );
-
-    const listByTypeMonthlySpentService = new ListByTypeService(
-      fakeMonthlyRepository,
-    );
-
     await createMonthlySpentService.execute({
       name: 'spent',
       type: 'fixed',

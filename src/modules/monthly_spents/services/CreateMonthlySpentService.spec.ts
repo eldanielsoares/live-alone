@@ -1,14 +1,19 @@
 import FakeMonthlySpentRepository from '../repositories/fakes/FakeMonthlySpentRepository';
 import CreateMonthlySpentService from './CreateMonthlySpentService';
 
-describe('CreateMonthlySpentService', () => {
-  it('it should be able to create a monthlySpentService', async () => {
-    const fakeMonthlyRepository = new FakeMonthlySpentRepository();
+let fakeMonthlyRepository: FakeMonthlySpentRepository;
+let createMonthlySpentService: CreateMonthlySpentService;
 
-    const createMonthlySpentService = new CreateMonthlySpentService(
+describe('CreateMonthlySpentService', () => {
+  beforeEach(() => {
+    fakeMonthlyRepository = new FakeMonthlySpentRepository();
+    fakeMonthlyRepository = new FakeMonthlySpentRepository();
+
+    createMonthlySpentService = new CreateMonthlySpentService(
       fakeMonthlyRepository,
     );
-
+  });
+  it('it should be able to create a monthlySpentService', async () => {
     const monthlySpents = await createMonthlySpentService.execute({
       name: 'spent',
       type: 'fixed',

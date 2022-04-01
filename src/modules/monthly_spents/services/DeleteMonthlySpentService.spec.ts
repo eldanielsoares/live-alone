@@ -3,18 +3,23 @@ import FakeMonthlySpentRepository from '../repositories/fakes/FakeMonthlySpentRe
 import CreateMonthlySpentService from './CreateMonthlySpentService';
 import DeleteMonthlySpentService from './DeleteMonthlySpentService';
 
+let fakeMonthlyRepository: FakeMonthlySpentRepository;
+let createMonthlySpentService: CreateMonthlySpentService;
+let deleteMonthlySpentService: DeleteMonthlySpentService;
+
 describe('DeleteMonthlySpentService', () => {
+  beforeEach(() => {
+    fakeMonthlyRepository = new FakeMonthlySpentRepository();
+
+    createMonthlySpentService = new CreateMonthlySpentService(
+      fakeMonthlyRepository,
+    );
+
+    deleteMonthlySpentService = new DeleteMonthlySpentService(
+      fakeMonthlyRepository,
+    );
+  });
   it('it should be able to delete a monthlySpent', async () => {
-    const fakeMonthlyRepository = new FakeMonthlySpentRepository();
-
-    const createMonthlySpentService = new CreateMonthlySpentService(
-      fakeMonthlyRepository,
-    );
-
-    const deleteMonthlySpentService = new DeleteMonthlySpentService(
-      fakeMonthlyRepository,
-    );
-
     const monthlySpents = await createMonthlySpentService.execute({
       name: 'spent',
       type: 'fixed',
@@ -30,12 +35,6 @@ describe('DeleteMonthlySpentService', () => {
   });
 
   it('it should not be able to delete a not existent monthlySpent', async () => {
-    const fakeMonthlyRepository = new FakeMonthlySpentRepository();
-
-    const deleteMonthlySpentService = new DeleteMonthlySpentService(
-      fakeMonthlyRepository,
-    );
-
     expect(deleteMonthlySpentService.execute('1234')).rejects.toBeInstanceOf(
       AppError,
     );
