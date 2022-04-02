@@ -1,3 +1,4 @@
+import AppError from '@shared/errors/AppError';
 import FakeFinancialProfileRepository from '../repositories/fakes/FakeFinancialProfileRepository';
 import CreateFinancialProfileService from './CreateFinancialProfileService';
 
@@ -22,5 +23,25 @@ describe('CreateFinancialProfileService', () => {
     });
 
     expect(financialProfile).toHaveProperty('id');
+  });
+
+  it('it should not be able to create a financialProfile with same user_id', async () => {
+    await createFinancialProfileService.execute({
+      monthly_income: 800,
+      monthly_spent: 400,
+      job_type: 'entrepreneur',
+      current_emergency_reserve: 1800,
+      user_id: '1234',
+    });
+
+    expect(
+      createFinancialProfileService.execute({
+        monthly_income: 800,
+        monthly_spent: 400,
+        job_type: 'entrepreneur',
+        current_emergency_reserve: 1800,
+        user_id: '1234',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
   });
 });
