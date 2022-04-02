@@ -39,6 +39,7 @@ export default class CreateFinancialProfile1648913042270
           {
             name: 'user_id',
             type: 'uuid',
+            isUnique: true,
           },
 
           {
