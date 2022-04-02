@@ -7,6 +7,8 @@ import IMonthlySpentRepository from '@modules/monthly_spents/repositories/IMonth
 import MonthlySpentRepository from '@modules/monthly_spents/infra/typeorm/repositories/MonthSpentRepository';
 import IUsersCodeAuthRepository from '@modules/users/repositories/IUsersCodesAuthRepository';
 import UsersCodeAuthRepository from '@modules/users/infra/typeorm/repositories/UsersCodesAuthRepository';
+import IFinancialProfileRepository from '@modules/financial_profile/repositories/IFinancialProfileRepository';
+import FinancialProfileRepository from '@modules/financial_profile/infra/typeorm/repositories/FinancialProfileRepository';
 
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
@@ -21,4 +23,9 @@ container.registerSingleton<IUsersCodeAuthRepository>(
 container.registerSingleton<IMonthlySpentRepository>(
   'MonthlySpentsRepository',
   MonthlySpentRepository,
+);
+
+container.registerSingleton<IFinancialProfileRepository>(
+  'FinancialProfileRepository',
+  FinancialProfileRepository,
 );
