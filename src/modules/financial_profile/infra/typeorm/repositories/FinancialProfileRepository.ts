@@ -36,16 +36,6 @@ class FinancialProfileRepository implements IFinancialProfileRepository {
 
     return financialProfile;
   }
-
-  public async getFinancialProfile(
-    user_id: string,
-  ): Promise<FinancialProfile | undefined> {
-    const financialProfile = await this.ormRepository.findOne({
-      where: { user_id },
-    });
-
-    return financialProfile;
-  }
 }
 
 export default FinancialProfileRepository;
