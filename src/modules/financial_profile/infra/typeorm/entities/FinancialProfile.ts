@@ -51,7 +51,7 @@ class FinancialProfile {
       },
     },
   })
-  current_emergency_reserve: string;
+  current_emergency_reserve: number;
 
   @Column()
   user_id: string;
