@@ -1,5 +1,5 @@
 import CreateFinancialProfileService from '@modules/financial_profile/services/CreateFinancialProfileService';
-import ShowFinancialProfileService from '@modules/financial_profile/services/ShowFInancialProfileService';
+import ShowFinancialProfileService from '@modules/financial_profile/services/ShowFinancialProfileService';
 import UpdateFinancialProfileService from '@modules/financial_profile/services/UpdateFinancialProfileService';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
