@@ -9,8 +9,8 @@ import IUsersCodeAuthRepository from '@modules/users/repositories/IUsersCodesAut
 import UsersCodeAuthRepository from '@modules/users/infra/typeorm/repositories/UsersCodesAuthRepository';
 import IFinancialProfileRepository from '@modules/financial_profile/repositories/IFinancialProfileRepository';
 import FinancialProfileRepository from '@modules/financial_profile/infra/typeorm/repositories/FinancialProfileRepository';
-import IFurnitureRepository from '@modules/fornitures/repositories/IFurnituresRepository';
-import FurnitureRepository from '@modules/fornitures/infra/typeorm/repositories/FurnituresRepository';
+import IFurnitureRepository from '@modules/furnitures/repositories/IFurnituresRepository';
+import FurnitureRepository from '@modules/furnitures/infra/typeorm/repositories/FurnituresRepository';
 
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',

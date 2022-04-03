@@ -1,5 +1,5 @@
-import ICreateFurnitureDTO from '@modules/fornitures/dtos/ICreateFurnitureDTO';
-import Furnitures from '@modules/fornitures/infra/typeorm/entities/Furnitures';
+import ICreateFurnitureDTO from '@modules/furnitures/dtos/ICreateFurnitureDTO';
+import Furnitures from '@modules/furnitures/infra/typeorm/entities/Furnitures';
 import { v4 } from 'uuid';
 import IFurnitureRepository from '../IFurnituresRepository';
 

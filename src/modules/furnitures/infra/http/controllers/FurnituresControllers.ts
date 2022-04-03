@@ -1,7 +1,7 @@
-import CreateFurnitureService from '@modules/fornitures/services/CreateFurnituresService';
-import DeleteFurnitureService from '@modules/fornitures/services/DeleteFurnitureService';
-import ShowAllFurnitureService from '@modules/fornitures/services/ShowAllFurnituresService';
-import UpdateFurnitureService from '@modules/fornitures/services/UpdateFurnitureService';
+import CreateFurnitureService from '@modules/furnitures/services/CreateFurnituresService';
+import DeleteFurnitureService from '@modules/furnitures/services/DeleteFurnitureService';
+import ShowAllFurnitureService from '@modules/furnitures/services/ShowAllFurnituresService';
+import UpdateFurnitureService from '@modules/furnitures/services/UpdateFurnitureService';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
