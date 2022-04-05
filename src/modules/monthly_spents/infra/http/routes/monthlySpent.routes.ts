@@ -12,12 +12,12 @@ monthlySpentRoutes.post(
   '/',
   celebrate({
     [Segments.HEADERS]: Joi.object({
-      authorization: Joi.string().length(5).required(),
+      authorization: Joi.string().required(),
     }).unknown(),
     [Segments.BODY]: Joi.object({
       name: Joi.string().required(),
       type: Joi.string().required(),
-      amount: Joi.string().required(),
+      amount: Joi.number().required(),
     }),
   }),
   monthlySpentController.create,
