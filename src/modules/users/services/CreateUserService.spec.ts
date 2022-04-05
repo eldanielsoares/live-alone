@@ -1,5 +1,6 @@
 import AppError from '@shared/errors/AppError';
 import FakeHashProvider from '../providers/fakes/FakeHashProvider';
+import FakeTokenJwtProvider from '../providers/fakes/FakeTokenJwtProvider';
 import FakeUsersCodeAuthRepository from '../repositories/fakes/FakeUserCodesAuthRepository';
 import FakeUsersRepository from '../repositories/fakes/FakeUserRepository';
 import CreateUserService from './CreateuserService';
@@ -7,6 +8,7 @@ import CreateUserService from './CreateuserService';
 let fakeUsersRepository: FakeUsersRepository;
 let fakeUserCodesAuthRepository: FakeUsersCodeAuthRepository;
 let fakeHashProvider: FakeHashProvider;
+let fakeJwtProvider: FakeTokenJwtProvider;
 let createUser: CreateUserService;
 
 describe('CreateUserService', () => {
@@ -14,11 +16,13 @@ describe('CreateUserService', () => {
     fakeUsersRepository = new FakeUsersRepository();
     fakeUserCodesAuthRepository = new FakeUsersCodeAuthRepository();
     fakeHashProvider = new FakeHashProvider();
+    fakeJwtProvider = new FakeTokenJwtProvider();
 
     createUser = new CreateUserService(
       fakeUsersRepository,
       fakeHashProvider,
       fakeUserCodesAuthRepository,
+      fakeJwtProvider,
     );
   });
 
@@ -35,7 +39,8 @@ describe('CreateUserService', () => {
       code_auth,
     });
 
-    expect(user).toHaveProperty('id');
+    expect(user.user).toHaveProperty('id');
+    expect(user).toHaveProperty('token');
   });
 
   it('should not be able to create an user with a existing email', async () => {
