@@ -1,6 +1,7 @@
 import AuthenticateService from '@modules/users/services/AutheticateService';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
+import { instanceToPlain } from 'class-transformer';
 
 export default class SessionController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -9,6 +10,6 @@ export default class SessionController {
 
     const user = await createUser.execute({ email, password });
 
-    return response.json(user);
+    return response.json(instanceToPlain(user));
   }
 }
