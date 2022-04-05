@@ -1,4 +1,5 @@
 import ensureAuthenticated from '@modules/users/infra/http/middlewares/EnsureAuthenticaded';
+import { celebrate, Joi, Segments } from 'celebrate';
 import { Router } from 'express';
 import CreateMonthlySpentController from '../controllers/CreateMonthlySpentController';
 
@@ -7,7 +8,28 @@ monthlySpentRoutes.use(ensureAuthenticated);
 const monthlySpentController = new CreateMonthlySpentController();
 
 monthlySpentRoutes.get('/', monthlySpentController.index);
-monthlySpentRoutes.post('/', monthlySpentController.create);
-monthlySpentRoutes.delete('/', monthlySpentController.delete);
+monthlySpentRoutes.post(
+  '/',
+  celebrate({
+    [Segments.HEADERS]: Joi.object({
+      authorization: Joi.string().length(5).required(),
+    }).unknown(),
+    [Segments.BODY]: Joi.object({
+      name: Joi.string().required(),
+      type: Joi.string().required(),
+      amount: Joi.string().required(),
+    }),
+  }),
+  monthlySpentController.create,
+);
+monthlySpentRoutes.delete(
+  '/',
+  celebrate({
+    [Segments.QUERY]: Joi.object({
+      id: Joi.string().required(),
+    }).unknown(),
+  }),
+  monthlySpentController.delete,
+);
 
 export default monthlySpentRoutes;
