@@ -1,11 +1,13 @@
 /* eslint-disable no-empty-function */
 /* eslint-disable no-useless-constructor */
 /* eslint-disable no-unused-vars */
+import auth from '@config/auth';
 import AppError from '@shared/errors/AppError';
 import { differenceInMinutes } from 'date-fns';
 import { inject, injectable } from 'tsyringe';
 import User from '../infra/typeorm/entities/User';
 import IHashProvider from '../providers/models/IHashProvider';
+import ITokenJwtProvider from '../providers/models/ITokenJwtProvider';
 import IUsersCodeAuthRepository from '../repositories/IUsersCodesAuthRepository';
 import IUsersRepository from '../repositories/IUsersRepository';
 
@@ -17,6 +19,11 @@ interface IRequestDTO {
   code_auth: string;
 }
 
+interface IResponse {
+  user: User;
+  token: string;
+}
+
 @injectable()
 export class CreateUserService {
   constructor(
@@ -26,6 +33,8 @@ export class CreateUserService {
     private hashProvider: IHashProvider,
     @inject('UsersCodeRepository')
     private userCodeRepository: IUsersCodeAuthRepository,
+    @inject('TokenProvider')
+    private tokenProvider: ITokenJwtProvider,
   ) {}
 
   public async execute({
@@ -34,7 +43,7 @@ export class CreateUserService {
     password,
     accepted_terms,
     code_auth,
-  }: IRequestDTO): Promise<User> {
+  }: IRequestDTO): Promise<IResponse> {
     const checkUserExists = await this.userRepository.findByEmail({ email });
 
     if (checkUserExists) {
@@ -60,14 +69,23 @@ export class CreateUserService {
 
     const hashedPassowrd = await this.hashProvider.generateHash(password);
 
-    const user = this.userRepository.create({
+    const user = await this.userRepository.create({
       name,
       email,
       password: hashedPassowrd,
       accepted_terms,
     });
 
-    return user;
+    const token = this.tokenProvider.sign({
+      secret: auth.jwt.secret,
+      expiresIn: auth.jwt.expiresIn,
+      id: user.id,
+    });
+
+    return {
+      user,
+      token,
+    };
   }
 }
 
