@@ -63,8 +63,8 @@ class HomeService {
     if (financialProfile) {
       emergency_reserve_recommended =
         financialProfile.job_type === 'fixed_job'
-          ? financialProfile.monthly_spent * 12
-          : financialProfile.monthly_spent * 6;
+          ? financialProfile.monthly_spent * 6
+          : financialProfile.monthly_spent * 12;
     }
 
     return {

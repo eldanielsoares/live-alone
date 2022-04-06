@@ -10,7 +10,6 @@ import IUsersRepository from '../repositories/IUsersRepository';
 interface IResponse {
   user: User;
   token: string;
-  created_at: Date;
 }
 
 interface IRequest {
@@ -51,7 +50,7 @@ class AuthenticateService {
       id: user.id,
     });
 
-    return { user, token, created_at: user.created_at };
+    return { user, token };
   }
 }
 
